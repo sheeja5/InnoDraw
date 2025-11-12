@@ -1,14 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { SparklesIcon } from './icons/SparklesIcon';
 
 interface IdeaInputPanelProps {
+  initialIdea?: string;
   onGenerate: (idea: string) => void;
   isLoading: boolean;
   loadingMessage: string;
 }
 
-const IdeaInputPanel: React.FC<IdeaInputPanelProps> = ({ onGenerate, isLoading, loadingMessage }) => {
-  const [idea, setIdea] = useState('');
+const IdeaInputPanel: React.FC<IdeaInputPanelProps> = ({ initialIdea = '', onGenerate, isLoading, loadingMessage }) => {
+  const [idea, setIdea] = useState(initialIdea);
+
+  useEffect(() => {
+    setIdea(initialIdea);
+  }, [initialIdea]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
